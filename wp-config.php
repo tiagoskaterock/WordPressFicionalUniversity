@@ -86,6 +86,7 @@ define('WP_DEBUG_DISPLAY', false);
 /* Add any custom values between this line and the "stop editing" line. */
 define('WP_HOME', 'http://localhost/fictional-university');
 define('WP_SITEURL', 'http://localhost/fictional-university');
+define('FS_METHOD', 'direct');
 
 
 /* That's all, stop editing! Happy publishing. */
