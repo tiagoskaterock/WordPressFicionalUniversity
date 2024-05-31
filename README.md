@@ -1,8 +1,19 @@
-# Change the name for of the project to wordpress
+# Download, fork or clone the project
 
-# Create a database called wordpress
+# Change the name for of the project to wordpress (or what you want)
+
+# Update the following lines on file .htaccess to wordpress (or what you want)
+
+- RewriteBase /wordpress/
+- RewriteRule . /wordpress/index.php [L]
+
+# Create a database called wordpress (or what you want)
 
 # Run al the SQL code in wp.sql/wordpress.sql
+
+# Update the following lines on wp-config to wordpress (or what you want)
+- define('WP_HOME', 'http://localhost/wordpress');
+- define('WP_SITEURL', 'http://localhost/wordpress');
 
 # Wordpress_Fictional_University
 
