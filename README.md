@@ -15,6 +15,8 @@
 - define('WP_HOME', 'http://localhost/wordpress');
 - define('WP_SITEURL', 'http://localhost/wordpress');
 
+# Don't forget to save permalinks on wp-admin/options-permalink.php to avoid some bugs of wordpress
+
 # Wordpress_Fictional_University
 
 ## Getting started
