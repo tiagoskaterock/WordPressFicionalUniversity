@@ -30,8 +30,16 @@
             </li>
 
 
-            <li <?php if(get_post_type() == 'event') echo "class='current-menu-item'" ?>>
-              <a href="<?= site_url() ?>/events" title="Events">Events</a> 
+            <li 
+              <?php if (get_post_type() == 'event' or is_page('past-events')): ?>
+                class='current-menu-item'
+              <?php endif ?>
+            >
+              <a 
+                href="<?= site_url() ?>/events" 
+                title="Events">
+                Events
+              </a> 
             </li>
 
 
