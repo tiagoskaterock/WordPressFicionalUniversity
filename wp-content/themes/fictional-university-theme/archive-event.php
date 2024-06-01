@@ -1,14 +1,14 @@
-<?php  get_header() ?>
+<?php get_header() ?>
 
 <div class="page-banner">
   <div class="page-banner__bg-image" style="background-image: url(<?= get_theme_file_uri() ?>/images/ocean.jpg)"></div>
   <div class="page-banner__content container container--narrow">
     <h1 class="page-banner__title">
-    	All Events
+      All Events
     </h1>
     <div class="page-banner__intro">
       <p>
-      	See what's going on in our world
+        See what's going on in our world
       </p>
     </div>
   </div>
@@ -16,14 +16,18 @@
 
 <div class="container container--narrow page-section">
   <?php 
-
     while (have_posts()) {
-      the_post(); ?>
+      the_post(); 
+      // Recupera a data do evento
+      $data_evento = get_post_meta( get_the_ID(), '_meu_prefixo_data', true );
+      // Converte a data para o formato "d/m/Y"
+      $data_formatada = date('d/m/Y', strtotime($data_evento));
+  ?>
       
       <div class="event-summary">
-        <a class="event-summary__date t-center" href="<?php the_permalink() ?>">
-          <span class="event-summary__month"><?php the_time('M') ?></span>
-          <span class="event-summary__day"><?php the_time('d') ?></span>
+        <a class="event-summary__date t-center" href="<?php the_permalink() ?>">          
+          <span class="event-summary__month"><?php echo date('M', strtotime($data_evento)); ?></span>
+          <span class="event-summary__day"><?php echo date('d', strtotime($data_evento)); ?></span>
         </a>
         <div class="event-summary__content">
           <h5 class="event-summary__title headline headline--tiny">
@@ -43,7 +47,5 @@
     ?>
 
 </div>
-
-
 
 <?php get_footer() ?>

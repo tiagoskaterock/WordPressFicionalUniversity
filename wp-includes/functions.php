@@ -8458,3 +8458,67 @@ function wp_recursive_ksort( &$array ) {
 	}
 	ksort( $array );
 }
+
+// cmb2 stuff
+add_action( 'cmb2_admin_init', 'registrar_metaboxes_personalizadas' );
+
+function registrar_metaboxes_personalizadas() {
+    $prefix = '_meu_prefixo_'; // Prefixo para evitar conflitos
+
+    // Define a nova metabox
+    $cmb = new_cmb2_box( array(
+        'id'            => $prefix . 'dados_metabox',
+        'title'         => __( 'Metabox Personalizada', 'cmb2' ),
+        'object_types'  => array( 'event' ), // Post types onde será exibido
+    ) );
+    
+    // Adiciona um campo de data com formato d/m/Y e torna obrigatório
+    $cmb->add_field( array(
+        'name'       => __( 'Data do Evento', 'cmb2' ),
+        'desc'       => __( 'Data do Evento', 'cmb2' ),
+        'id'         => $prefix . 'data',
+        'type'       => 'text',
+        'attributes' => array(
+            'type' => 'date',
+            'format' => 'd/m/Y',
+            'required' => 'required'
+        ),
+    ));
+
+    // Adiciona um gancho para salvar os dados
+    add_action( 'save_post_event', 'salvar_dados_metabox', 10, 2 );
+}
+
+// Função para salvar os dados do metabox
+function salvar_dados_metabox( $post_id, $post ) {	
+    // Verifica se o usuário atual tem permissão para editar o post
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    // Verifica se os dados foram enviados corretamente
+    if ( isset( $_POST['_meu_prefixo_data'] ) ) {
+        $data = DateTime::createFromFormat( 'd/m/Y', $_POST['_meu_prefixo_data'] );        
+        if ( $data ) {
+            $data_formatada = $data->format( 'Y-m-d' ); // Formato esperado pelo WordPress
+            // Atualiza o campo personalizado no banco de dados
+            update_post_meta( $post_id, '_meu_prefixo_data', $data_formatada );
+        } else {
+            // Caso a data não esteja no formato correto, você pode adicionar uma mensagem de erro aqui.
+            // Por exemplo:
+            add_action( 'admin_notices', 'data_formato_incorreto' );
+        }
+    }
+}
+
+// Exemplo de função para exibir uma mensagem de erro
+function data_formato_incorreto() {
+    ?>
+    <div class="error">
+        <p><?php _e( 'A data do evento não está em um formato válido. Por favor, insira a data no formato dd/mm/aaaa.', 'cmb2' ); ?></p>
+    </div>
+    <?php
+}
+
+
+

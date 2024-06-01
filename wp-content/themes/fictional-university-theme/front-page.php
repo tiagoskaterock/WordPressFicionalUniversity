@@ -13,23 +13,29 @@
 </div>
 
 <div class="full-width-split group">
+
+  <!-- event -->
   <div class="full-width-split__one">
     <div class="full-width-split__inner">
       <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
 
       <?php  
-
         $homePageEvents = new WP_Query(array(
           'posts_per_page' => 2,
           'post_type' => 'event',
         ));
 
         while ($homePageEvents->have_posts()) {
-          $homePageEvents->the_post(); ?>
+          $homePageEvents->the_post(); 
+          // Recupera a data do evento
+          $data_evento = get_post_meta( get_the_ID(), '_meu_prefixo_data', true );
+          // Converte a data para o formato "d/m/Y"
+          $data_formatada = date('d/m/Y', strtotime($data_evento));
+      ?>
           <div class="event-summary">
             <a class="event-summary__date t-center" href="<?php the_permalink() ?>">
-              <span class="event-summary__month"><?php the_time('M') ?></span>
-              <span class="event-summary__day"><?php the_time('d') ?></span>
+              <span class="event-summary__month"><?php echo date('M', strtotime($data_evento)); ?></span>
+              <span class="event-summary__day"><?php echo date('d', strtotime($data_evento)); ?></span>
             </a>
             <div class="event-summary__content">
               <h5 class="event-summary__title headline headline--tiny">
@@ -48,9 +54,7 @@
               </p>
             </div>
           </div>          
-        <?php }
-
-      ?>
+        <?php } ?>
 
       <p class="t-center no-margin">
         <a 
@@ -61,9 +65,13 @@
       </p>
     </div>
   </div>
+  <!-- end events -->
+
+
+  <!-- blog -->
   <div class="full-width-split__two">
     <div class="full-width-split__inner">
-      <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
+      <h2 class="headline headline--small-plus t-center">From Our Blog</h2>
 
       <?php 
         $homepagePosts = new WP_Query(array(
@@ -106,6 +114,8 @@
       </p>
     </div>
   </div>
+  <!-- end blog -->
+  
 </div>
 
 <div class="hero-slider">
