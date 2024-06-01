@@ -8519,6 +8519,3 @@ function data_formato_incorreto() {
     </div>
     <?php
 }
-
-
-

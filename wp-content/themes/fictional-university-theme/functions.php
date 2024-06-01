@@ -25,3 +25,23 @@ function university_features() {
 add_action('wp_enqueue_scripts', 'university_files'); // css and javascript
 
 add_action('after_setup_theme', 'university_features'); // title
+
+// eventos futuros
+function filter_upcoming_events($query) {
+    if (!is_admin() && $query->is_main_query() && is_post_type_archive('event')) {
+        $today = date('Ymd');
+        $query->set('meta_key', '_meu_prefixo_data');
+        $query->set('orderby', 'meta_value_num');
+        $query->set('order', 'ASC');
+        $query->set('meta_query', array(
+            array(
+                'key' => '_meu_prefixo_data',
+                'compare' => '>=',
+                'value' => $today,
+                'type' => 'DATE'
+            )
+        ));
+    }
+}
+add_action('pre_get_posts', 'filter_upcoming_events');
+
