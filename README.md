@@ -1,48 +1,68 @@
-# Download, fork or clone the project
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=wordpress" />
+  </a>
+</p>
 
-# Change the name for of the project to fictional_university (or whatever you want to call it)
+# Fictional University
 
-# Update the following lines on file .htaccess to fictional_university (or whatever you want to call it)
+Follow these steps to set up the Fictional University project on your local environment.
 
-- RewriteBase /fictional_university/
-- RewriteRule . /fictional_university/index.php [L]
+## Installation Instructions
 
-# Create a database called fictional_university (or whatever you want to call it)
+1. **Download or Clone the Project**
 
-# Run al the SQL code in wp.sql/fictional_university.sql
+   - Download, fork, or clone the project repository to your local machine.
 
-# Update the following lines on wp-config to fictional_university (or whatever you want to call it)
-- define('WP_HOME', 'http://localhost/fictional_university');
-- define('WP_SITEURL', 'http://localhost/fictional_university');
+2. **Change Project Name**
 
-# Don't forget to save permalinks on wp-admin/options-permalink.php to avoid some bugs of wordpress
+   - Rename the project directory to `fictional_university` or any other desired name.
 
-# Wordpress_Fictional_University
+3. **Update .htaccess File**
 
-## Getting started
+   - Modify the following lines in the `.htaccess` file:
+     ```
+     RewriteBase /fictional_university/
+     RewriteRule . /fictional_university/index.php [L]
+     ```
 
-This is my first Wordpress Website, I made while learning with some Udemy classes. I hope this can help anyone. 
+4. **Create Database**
 
-Any suggestion would be really aprecciated.
+   - Create a MySQL database named `fictional_university` or any preferred name.
 
-The database dump in in wp-sql/wordpress.sql
+5. **Run SQL Scripts**
 
-##### Website
-<img src='demo-img/1.png' alt="Fictional University">
+   - Execute the SQL code in either `wp.sql` or `fictional_university.sql` to populate the database.
 
-<img src='demo-img/2.png' alt="Fictional University">
+6. **Update wp-config.php**
 
-<img src='demo-img/3.png' alt="Fictional University">
+   - Update the following lines in the `wp-config.php` file:
+     ```
+     define('WP_HOME', 'http://localhost/fictional_university');
+     define('WP_SITEURL', 'http://localhost/fictional_university');
+     ```
 
-<img src='demo-img/4.png' alt="Fictional University">
+7. **Save Permalinks**
 
-<img src='demo-img/5.png' alt="Fictional University">
+   - Go to `wp-admin/options-permalink.php` and save permalinks to avoid potential Wordpress bugs.
 
-<img src='demo-img/6.png' alt="Fictional University">
+## About the Project
 
-##### Admin
-<img src='demo-img/10.png' alt="Fictional University Wordpress Panel">
+This Wordpress website was created as part of learning exercises from Udemy classes. It serves as a beginner's guide to building a Wordpress site.
 
-<img src='demo-img/11.png' alt="Fictional University Wordpress Panel">
+Feedback and suggestions are welcome!
 
-<img src='demo-img/12.png' alt="Fictional University Wordpress Panel">
+### Screenshots
+
+#### Website
+![Homepage](demo-img/1.png)
+![About Page](demo-img/2.png)
+![Courses Page](demo-img/3.png)
+![Events Page](demo-img/4.png)
+![Blog Page](demo-img/5.png)
+![Contact Page](demo-img/6.png)
+
+#### Admin Panel
+![Dashboard](demo-img/10.png)
+![Posts](demo-img/11.png)
+![Settings](demo-img/12.png)
