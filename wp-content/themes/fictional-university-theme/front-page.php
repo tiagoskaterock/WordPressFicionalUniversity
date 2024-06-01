@@ -20,15 +20,29 @@
       <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
 
       <?php  
+        // Obtém a data atual no formato Ymd
+        $today = date('Ymd');
+        // Query personalizada para eventos futuros ordenados pela data
         $homePageEvents = new WP_Query(array(
           'posts_per_page' => 2,
           'post_type' => 'event',
+          'meta_key' => '_meu_prefixo_data',
+          'orderby' => 'meta_value_num',
+          'order' => 'ASC',
+          'meta_query' => array(
+            array(
+              'key' => '_meu_prefixo_data',
+              'compare' => '>=',
+              'value' => $today,
+              'type' => 'DATE'
+            )
+          )
         ));
 
         while ($homePageEvents->have_posts()) {
           $homePageEvents->the_post(); 
           // Recupera a data do evento
-          $data_evento = get_post_meta( get_the_ID(), '_meu_prefixo_data', true );
+          $data_evento = get_post_meta(get_the_ID(), '_meu_prefixo_data', true);
           // Converte a data para o formato "d/m/Y"
           $data_formatada = date('d/m/Y', strtotime($data_evento));
       ?>
@@ -45,21 +59,18 @@
                 <?php 
                   if (has_excerpt()) {
                     echo get_the_excerpt();
-                  }
-                  else {
-                    wp_trim_words(get_the_content(), 18);
+                  } else {
+                    echo wp_trim_words(get_the_content(), 18);
                   } 
                 ?> 
                 <a href="<?php the_permalink() ?>" class="nu gray">Learn more</a>
               </p>
             </div>
           </div>          
-        <?php } ?>
+      <?php } wp_reset_postdata(); ?>
 
       <p class="t-center no-margin">
-        <a 
-          href="<?php echo get_post_type_archive_link('event'); ?>" 
-          class="btn btn--blue">
+        <a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn btn--blue">
           View All Events
         </a>
       </p>
@@ -115,7 +126,7 @@
     </div>
   </div>
   <!-- end blog -->
-  
+
 </div>
 
 <div class="hero-slider">
